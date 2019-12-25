@@ -1,7 +1,11 @@
 //package PA2;
 
+import reliable.PacketManager;
+import reliable.ReliableSender;
+
 import java.io.*;
 import java.net.*;
+import java.util.Arrays;
 
 /**
 @author V. Arun
@@ -21,7 +25,8 @@ public class UDPClient {
 				DatagramPacket recvDgram = new DatagramPacket(msg, msg.length);
 				try {
 					udpsock.receive(recvDgram);
-					System.out.write(recvDgram.getData(), 0, recvDgram.getLength());
+					byte[] bytes = PacketManager.chopTrailingZeros(recvDgram.getData());
+					System.out.write(bytes);
 				} catch(IOException e) {
 					System.out.println(e); 
 					continue;
@@ -32,7 +37,7 @@ public class UDPClient {
 	
 	// Reads from standard input and sends datagram
 	public static void main(String[] args) throws SocketException, UnknownHostException, IOException {
-		udpsock = new DatagramSocket();
+		udpsock = new ReliableSender();
 		BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 		(new UDPReader()).start();
 		String input=null;

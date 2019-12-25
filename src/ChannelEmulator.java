@@ -40,7 +40,7 @@ public class ChannelEmulator {
 	// Default channel parameters
 	private static double LOSS = 0.1; // loss rate
 	private static double DELAY = 0.1; // delay in seconds
-	private static double DELAY_DEV_RATIO = 1.0; // ratio of deviation to average delay
+	private static double DELAY_DEV_RATIO = 1; // ratio of deviation to average delay
 	private static double CORRUPTION = 0.01; // probability of corruption of exactly one byte in each 100 byte block
 	private static boolean PRIVILEGED_MODE=false; // If true, only privileged_user can set CHNL parameters
 	private static String privileged_user=null;
